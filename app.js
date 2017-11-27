@@ -7,9 +7,11 @@ var express = require('express')
   , routes = require('./routes')
   , creditscore = require('./routes/creditscore')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , os = require('os');
 
 var app = express();
+var hostname = os.hostname();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
