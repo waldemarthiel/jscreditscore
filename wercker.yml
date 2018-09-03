@@ -11,6 +11,10 @@ push-to-releases:
     - internal/docker-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         cmd: node /pipeline/source/app.js
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        repository: $DOCKER_REPO
+        registry: https://iad.ocir.io/v2
 
 deploy-to-oke:
   box:
