@@ -13,7 +13,7 @@ push-to-releases:
         cmd: node /pipeline/source/app.js
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        repository: $DOCKER_REPO_SRV$DOCKER_REPO_PORT$DOCKER_REPO_PATH
+        repository: $DOCKER_REPO_SRV$DOCKER_REPO_PATH
         registry: https://$DOCKER_REPO_SRV/v2
 
 deploy-to-oke:
