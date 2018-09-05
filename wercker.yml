@@ -53,6 +53,13 @@ deploy-to-oke:
         command: create secret docker-registry wrelease --docker-server=$DOCKER_REPO_SRV --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=${WERCKER_APPLICATION_OWNER_NAME}@mail.com --namespace=$WERCKER_APPLICATION_OWNER_NAME
         
     - kubectl:
+        name: create OCR secret (with srv port)
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: create secret docker-registry wrelease --docker-server=$DOCKER_REPO_SRV:9595 --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=${WERCKER_APPLICATION_OWNER_NAME}@mail.com --namespace=$WERCKER_APPLICATION_OWNER_NAME
+        
+    - kubectl:
         name: create deplyoment
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
