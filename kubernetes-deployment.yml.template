@@ -21,7 +21,7 @@ spec:
         run: rest-jscreditscore
     spec:
       containers:
-      - image: ${DOCKER_REPO_WTH_PORT}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+      - image: ${DOCKER_REPO_SRV}${DOCKER_REPO_PORT}${DOCKER_REPO_PATH}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         name: rest-jscreditscore
         ports:

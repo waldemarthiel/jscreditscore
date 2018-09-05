@@ -13,7 +13,7 @@ push-to-releases:
         cmd: node /pipeline/source/app.js
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        repository: $DOCKER_REPO
+        repository: $DOCKER_REPO_SRV$DOCKER_REPO_PORT$DOCKER_REPO_PATH
         registry: https://$DOCKER_REPO_SRV/v2
 
 deploy-to-oke:
@@ -50,15 +50,8 @@ deploy-to-oke:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry wrelease --docker-server=$DOCKER_REPO_SRV --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=${WERCKER_APPLICATION_OWNER_NAME}@mail.com --namespace=$WERCKER_APPLICATION_OWNER_NAME
-        
-    - kubectl:
-        name: create OCR secret (with srv port)
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: create secret docker-registry wrelease --docker-server=$DOCKER_REPO_SRV:9595 --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=${WERCKER_APPLICATION_OWNER_NAME}@mail.com --namespace=$WERCKER_APPLICATION_OWNER_NAME
-        
+        command: create secret docker-registry wrelease --docker-server=$DOCKER_REPO_SRV$DOCKER_REPO_PORT --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=${WERCKER_APPLICATION_OWNER_NAME}@mail.com --namespace=$WERCKER_APPLICATION_OWNER_NAME
+                
     - kubectl:
         name: create deplyoment
         server: $KUBERNETES_MASTER
